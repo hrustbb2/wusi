@@ -1,0 +1,39 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack --config=ts.config.js",
+    "prod": "webpack --config=app2.config.js --env.production"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/jquery": "^3.3.24",
+    "@types/node": "^10.12.12",
+    "css-loader": "^0.28.9",
+    "extract-loader": "^3.1.0",
+    "file-loader": "^1.1.6",
+    "jquery": "^3.3.1",
+    "jquery-resizable": "^1.0.6",
+    "jquery-resizable-dom": "^0.32.0",
+    "jquery-ui": "^1.12.1",
+    "node-sass": "^4.10.0",
+    "postcss-loader": "^3.0.0",
+    "precss": "^4.0.0",
+    "resizable": "^1.2.1",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.20.1",
+    "ts-loader": "^5.3.3",
+    "typescript": "^2.1.6",
+    "uglifyjs-webpack-plugin": "^2.1.1",
+    "webpack": "^4.29.3"
+  },
+  "devDependencies": {
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "hard-source-webpack-plugin": "^0.13.1",
+    "webpack-cli": "^3.2.3"
+  }
+}

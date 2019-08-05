@@ -1,0 +1,26 @@
+{
+  "autoload": {
+    "psr-4": {
+      "src\\": "src/"
+    }
+  },
+  "name": "root/html",
+  "license": "MID",
+  "authors": [
+    {
+      "name": "hrustbb2",
+      "email": "hrustbb2@gmail.com"
+    }
+  ],
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^2.14"
+  },
+  "scripts": {
+    "php-cs-fixer": "vendor/bin/php-cs-fixer fix ./src --rules=@PSR2",
+    "test": "vendor/phpunit/phpunit/phpunit src/BBParserTest"
+  },
+  "require": {
+    "psr/http-message": "^1.0",
+    "phpunit/phpunit": "^8.3"
+  }
+}
