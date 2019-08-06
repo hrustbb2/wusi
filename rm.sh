@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-appname="wusi"
+appname="appname"
 
 sed -i 's/^appname="'${appname}'"/appname="appname"/' ./rm.sh
 sed -i 's/^appname="'${appname}'"/appname="appname"/' ./up.sh

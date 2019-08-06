@@ -25,6 +25,20 @@ export class Editor implements IEditor {
         this._buttons = new Array();
         this._keyListeners = {};
         this._editorDiv = editorDiv;
+        (<HTMLElement>this._editorDiv).onpaste = function(event:Event){
+            event.preventDefault();
+            if ((<any>window).clipboardData) {
+                let content = (<any>window).clipboardData.getData('Text');        
+                let txt = document.createTextNode(content);
+                let range = StaticTools.getRange();
+                range.insertNode(txt);
+            } else {
+                let content = ((<any>event).originalEvent || event).clipboardData.getData('text/plain');
+                let txt = document.createTextNode(content);
+                let range = StaticTools.getRange();
+                range.insertNode(txt);
+            } 
+        }.bind(this);
         (<HTMLElement>this._editorDiv).onkeydown = function(event:KeyboardEvent){
             this.keyDown(event);
         }.bind(this);

@@ -49,16 +49,40 @@ export class InsertUl implements IToolButton {
     public run()
     {
         let range = StaticTools.getRange();
-        let topMyWrapper = StaticTools.topMyWrapper(range.commonAncestorContainer, this._isMyWrapper.bind(this));
-        if(topMyWrapper === null){
-            let ul = this.createUl();
-            let br = document.createElement('br');
-            let br2 = document.createElement('br');
-            range.insertNode(br);
-            range.insertNode(ul);
-            range.insertNode(br2);
-            range.setStartAfter(ul);
+        let topNodes = StaticTools.getCommonTopNodes(range.startContainer, range.endContainer);
+        let selectedNodes = StaticTools.getSelectedNodes(topNodes[0].parentElement, range.startContainer, range.endContainer);
+        selectedNodes.unshift(topNodes[0]);
+        selectedNodes.push(topNodes[1]);
+        
+        let ul = this.createUl();
+        let li = ul.firstChild;
+
+        for(let i in selectedNodes){
+            if(selectedNodes[i].nodeName.toLowerCase() == 'br' ||
+               (selectedNodes[i].nodeName.toLowerCase() == '#text' && (<any>selectedNodes[i]).data == '')){
+                    continue;
+            }
+            //if(selectedNodes[i].nodeName.toLowerCase() !== 'br'){
+                let newLi = document.createElement('li');
+                newLi.appendChild(StaticTools.cloneNodes([selectedNodes[i]])[0]);
+                ul.insertBefore(newLi, li);
+            //}
+            selectedNodes[i].parentElement.removeChild(selectedNodes[i]);
         }
+        ul.removeChild(li);
+
+        range.insertNode(ul);
+
+        // let topMyWrapper = StaticTools.topMyWrapper(range.commonAncestorContainer, this._isMyWrapper.bind(this));
+        // if(topMyWrapper === null){
+        //     let ul = this.createUl();
+        //     let br = document.createElement('br');
+        //     let br2 = document.createElement('br');
+        //     range.insertNode(br);
+        //     range.insertNode(ul);
+        //     range.insertNode(br2);
+        //     range.setStartAfter(ul);
+        // }
     }
 
     public isMyWrapper(node:Node):boolean

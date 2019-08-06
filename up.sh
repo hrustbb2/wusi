@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-appname="wusi"
+appname="appname"
 
 docker network create -d bridge --subnet 192.168.2.0/24 --gateway 192.168.2.8 ${appname}_dockernet
 docker-compose up --force-recreate -d

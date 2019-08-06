@@ -27,4 +27,4 @@ services:
 networks:
   default:
     external:
-      name: dockernet
+      name: wusi2_dockernet
