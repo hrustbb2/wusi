@@ -30,16 +30,6 @@ module.exports = env => {
         wysi: [
             './Main.ts'
         ],
-        lib: [
-            './ts/Editor.ts',
-            './ts/InsertUl',
-            './ts/KeyListener',
-            './ts/StaticTools',
-            './ts/WrapperButton',
-        ]
-        // editor: './ts/Editor.ts',
-        // insertul: './ts/InsertUl',
-        // keyListener: './ts/KeyListener',
     };
     config.module = {
         rules: [
@@ -49,7 +39,7 @@ module.exports = env => {
                     {
                         loader: 'ts-loader',
                         options: {
-                            configFile: 'tsconfig.json'
+                            configFile: 'tsconfig.webpack.json'
                         }
                     }
                 ],

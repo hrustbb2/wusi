@@ -41,8 +41,8 @@ $(document).ready(function(){
 
     let boldButtonEl = document.querySelector('.toolbar .bold');
     let boldTag:TWrapper = {
-        elName: 'span',
-        className: 'bold-text',
+        elName: 'b',
+        className: '',
         bbCode: 'b',
         child: null,
     };
@@ -50,8 +50,8 @@ $(document).ready(function(){
 
     let italicButtonEl = document.querySelector('.toolbar .italic');
     let italicTag:TWrapper = {
-        elName: 'span',
-        className: 'italic-text',
+        elName: 'i',
+        className: '',
         bbCode: 'i',
         child: null,
     };
@@ -60,8 +60,8 @@ $(document).ready(function(){
     let underlineButtonEl = document.querySelector('.toolbar .underline');
     let ulButtonEl = document.querySelector('.toolbar .ul');
     let underlineTag:TWrapper = {
-        elName: 'span',
-        className: 'underline-text',
+        elName: 'u',
+        className: '',
         bbCode: 'u',
         child: null,
     };
@@ -97,5 +97,6 @@ $(document).ready(function(){
         e.preventDefault();
         //editor.stringToContent('12[b]34[/b]56');
         console.log(editor.contentToString(div));
+        //div.innerHTML = '';
     })
 })

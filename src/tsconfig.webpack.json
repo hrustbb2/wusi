@@ -5,16 +5,8 @@
     "moduleResolution": "node",
     "noImplicitAny": true,
     "target": "es5",
-    "sourceMap": true,
-    "declaration": true
+    "sourceMap": true
   },
-  "files": [
-    "./ts/Editor.ts",
-    "./ts/InsertUl.ts",
-    "./ts/KeyListener.ts",
-    "./ts/StaticTools.ts",
-    "./ts/WrapperButton.ts"
-  ],
   "exclude": [
     "node_modules"
   ]

@@ -6,7 +6,7 @@ sed -i 's/^appname="appname"/appname="'${appname}'"/' ./rm.sh
 sed -i 's/appname="appname"/appname="'${appname}'"/g' ./up.sh
 sed -i 's/COMPOSE_PROJECT_NAME=appname_/COMPOSE_PROJECT_NAME='${appname}'_/g' ./.env
 
-docker network create -d bridge --subnet 192.168.0.0/24 --gateway 192.168.0.1 dockernet
+docker network create -d bridge --subnet 192.168.2.0/24 --gateway 192.168.2.8 ${appname}_dockernet
 docker-compose build --no-cache
 
 #if ! [ -d ./data ];
@@ -17,4 +17,4 @@ docker-compose build --no-cache
 wait $!
 echo 'Please wait...'
 sleep 3
-docker network rm dockernet
+docker network rm ${appname}_dockernet

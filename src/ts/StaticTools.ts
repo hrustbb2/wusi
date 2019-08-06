@@ -310,6 +310,9 @@ export class StaticTools {
     static deleteEmptyTextNodes(containerNode:Node)
     {
         let i = 0;
+        if(containerNode.nodeName == '#text'){
+            return;
+        }
         let childNodes = <any>containerNode.childNodes;
         while(i <= childNodes.length - 1){
             if(childNodes[i].nodeName == '#text' && childNodes[i].data == ''){

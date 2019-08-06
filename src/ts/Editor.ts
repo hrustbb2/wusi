@@ -18,13 +18,15 @@ export class Editor implements IEditor {
 
     private _wrappersCollection:TWrapperCollection = {};
 
+    private _ff:Node;
+
     public constructor(editorDiv:Element)
     {
         this._buttons = new Array();
         this._keyListeners = {};
         this._editorDiv = editorDiv;
         (<HTMLElement>this._editorDiv).onkeydown = function(event:KeyboardEvent){
-            this.keyPress(event);
+            this.keyDown(event);
         }.bind(this);
         editorDiv.addEventListener('mouseup', function(e:Event) {
             let range = StaticTools.getRange();
@@ -37,19 +39,19 @@ export class Editor implements IEditor {
                 this.isMyButton(this._buttons[i], path);
             }
         }.bind(this));
+        this._ff = editorDiv.cloneNode();
     }
 
     private isMyButton(button:IToolButton, path:Node[])
     {
         for(let i in path){
-            if((<HTMLElement>path[i]).nodeName.toLowerCase() == button.wrapper.elName &&
-                (<HTMLElement>path[i]).classList.contains(button.wrapper.className)){
-                    button.setActive();
+            if(button.isMyWrapper(path[i])){
+                button.setActive();
             }
         }
     }
 
-    private keyPress(event:KeyboardEvent)
+    private keyDown(event:KeyboardEvent)
     {
         let range = StaticTools.getRange();
         let path = StaticTools.getPath(range.startContainer);

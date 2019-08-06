@@ -32,14 +32,20 @@ export class WrapperButton implements IToolButton {
     private createWrapper():Element
     {
         let wrapper = document.createElement(this._wrapperInfo.elName);
-        wrapper.classList.add(this._wrapperInfo.className);
+        if(this._wrapperInfo.className){
+            wrapper.classList.add(this._wrapperInfo.className);
+        }
+        
         return wrapper;
     }
 
-    private isMyWrapper(node:Node):boolean
+    private _isMyWrapper(node:Node):boolean
     {
-        if((<Element>node).classList && (<Element>node).classList.contains){
-            return (<Element>node).classList.contains(this._wrapperInfo.className);
+        // if((<Element>node).classList && (<Element>node).classList.contains){
+        //     return (<Element>node).classList.contains(this._wrapperInfo.className);
+        // }
+        if(node.nodeName.toLowerCase() == this._wrapperInfo.elName){
+            return true;
         }
         return false;
     }
@@ -47,12 +53,26 @@ export class WrapperButton implements IToolButton {
     public run()
     {
         let range = StaticTools.getRange();
-        let topMyWrapper = StaticTools.topMyWrapper(range.commonAncestorContainer, this.isMyWrapper.bind(this));
+        let topMyWrapper = StaticTools.topMyWrapper(range.commonAncestorContainer, this._isMyWrapper.bind(this));
         if(topMyWrapper === null){
-            StaticTools.wrap(range, this.isMyWrapper.bind(this), this.createWrapper.bind(this));
+            StaticTools.wrap(range, this._isMyWrapper.bind(this), this.createWrapper.bind(this));
         }else{
-            StaticTools.unWrap(topMyWrapper, this.isMyWrapper.bind(this));
+            StaticTools.unWrap(topMyWrapper, this._isMyWrapper.bind(this));
         }
+    }
+
+    public isMyWrapper(node:Node):boolean
+    {
+        if((<HTMLElement>node).nodeName.toLowerCase() == this._wrapperInfo.elName){
+            if(this._wrapperInfo.className){
+                if((<HTMLElement>node).classList.contains(this._wrapperInfo.className)){
+                    return true;
+                }
+            }else{
+                return true;
+            }
+        }
+        return false;
     }
 
     public setActive()

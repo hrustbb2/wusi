@@ -6,4 +6,5 @@ export interface IToolButton {
     unsetActive():void;
     el:Element;
     wrapper:TWrapper;
+    isMyWrapper(node:Node):boolean;
 }

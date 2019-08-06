@@ -9,4 +9,4 @@ done
 DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 
 sudo chown $USER -R $DIR/../app
-sudo chmod 777 -R $DIR/../app/storage
+sudo chown $USER -R $DIR/../src
