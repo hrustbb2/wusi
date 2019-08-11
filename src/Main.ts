@@ -22,7 +22,10 @@ $(document).ready(function(){
         (<HTMLElement>div).style.height = currentHeiht + dH - 12 + 'px';
     }
 
-    
+    document.querySelector('.undo').addEventListener('click', function(e:Event){
+        alert('dfg');
+        document.execCommand('undo');
+    }.bind(this));
 
     resizer.addEventListener('mousedown', function(e:Event) {
         document.querySelector('body').addEventListener('mousemove', resize);
@@ -34,7 +37,7 @@ $(document).ready(function(){
     let brTag:TWrapper = {
         elName: 'br',
         className: '',
-        bbCode: 'br',
+        bbCode: '/br',
         child: null,
     };
     editor.addWraper(brTag);
@@ -95,8 +98,8 @@ $(document).ready(function(){
     let toStringButton = document.querySelector('.tostring');
     toStringButton.addEventListener('click', function(e:Event){
         e.preventDefault();
-        //editor.stringToContent('12[b]34[/b]56');
-        console.log(editor.contentToString(div));
+        editor.stringToContent('12[/br][/br]56');
+        //console.log(editor.contentToString(div));
         //div.innerHTML = '';
     })
 })
