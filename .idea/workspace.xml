@@ -4,11 +4,8 @@
     <list default="true" id="df51ecc2-7d0f-4b24-bb80-c077e157dc30" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rm.sh" beforeDir="false" afterPath="$PROJECT_DIR$/rm.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ts/Editor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/Editor.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ts/InsertUl.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/ts/InsertUl.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/wysi.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/wysi.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/up.sh" beforeDir="false" afterPath="$PROJECT_DIR$/up.sh" afterDir="false" />
     </list>
@@ -46,11 +43,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ts/Editor.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="400">
-              <caret line="141" column="61" selection-start-line="141" selection-start-column="61" selection-end-line="141" selection-end-column="61" />
+            <state relative-caret-position="525">
+              <caret line="80" column="54" lean-forward="true" selection-start-line="80" selection-start-column="54" selection-end-line="80" selection-end-column="54" />
             </state>
           </provider>
         </entry>
@@ -82,10 +79,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="790">
+            <state relative-caret-position="1485">
               <caret line="104" column="2" selection-start-line="104" selection-start-column="2" selection-end-line="104" selection-end-column="2" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
@@ -137,8 +134,8 @@
         <option value="$PROJECT_DIR$/src/ts.config.js" />
         <option value="$PROJECT_DIR$/src/ts/InsertUl.ts" />
         <option value="$PROJECT_DIR$/app/index.html" />
-        <option value="$PROJECT_DIR$/src/ts/Editor.ts" />
         <option value="$PROJECT_DIR$/src/Main.ts" />
+        <option value="$PROJECT_DIR$/src/ts/Editor.ts" />
       </list>
     </option>
   </component>
@@ -154,6 +151,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -186,7 +184,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -235,18 +232,19 @@
       <workItem from="1565096398239" duration="24000" />
       <workItem from="1565173395136" duration="2665000" />
       <workItem from="1565346554239" duration="2001000" />
-      <workItem from="1565519756084" duration="608000" />
+      <workItem from="1565519756084" duration="2428000" />
+      <workItem from="1565614146581" duration="5993000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14955000" />
+    <option name="totallyTimeSpent" value="22768000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="6" y="25" width="1914" height="1051" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.27706325" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.28027868" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -380,6 +378,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/rm.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/ts/InsertUl.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="960">
@@ -418,17 +423,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tsconfig.json">
+    <entry file="file://$PROJECT_DIR$/src/Main.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="27" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rm.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+        <state relative-caret-position="1485">
+          <caret line="104" column="2" selection-start-line="104" selection-start-column="2" selection-end-line="104" selection-end-column="2" />
+          <folding>
+            <element signature="e#0#16#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -439,20 +440,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ts/Editor.ts">
+    <entry file="file://$PROJECT_DIR$/src/tsconfig.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="141" column="61" selection-start-line="141" selection-start-column="61" selection-end-line="141" selection-end-column="61" />
+        <state relative-caret-position="225">
+          <caret line="15" column="27" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="27" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.ts">
+    <entry file="file://$PROJECT_DIR$/src/ts/Editor.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="790">
-          <caret line="104" column="2" selection-start-line="104" selection-start-column="2" selection-end-line="104" selection-end-column="2" />
-          <folding>
-            <element signature="e#0#16#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="525">
+          <caret line="80" column="54" lean-forward="true" selection-start-line="80" selection-start-column="54" selection-end-line="80" selection-end-column="54" />
         </state>
       </provider>
     </entry>

@@ -34,9 +34,15 @@ export class Editor implements IEditor {
                 range.insertNode(txt);
             } else {
                 let content = ((<any>event).originalEvent || event).clipboardData.getData('text/plain');
-                let txt = document.createTextNode(content);
-                let range = StaticTools.getRange();
-                range.insertNode(txt);
+                let contentHtml = ((<any>event).originalEvent || event).clipboardData.getData('text/html');
+                console.log(contentHtml);
+                let dom = new DOMParser().parseFromString(contentHtml, "text/html");
+                let div = document.createElement('div');
+                this.parseFormat(dom.body, this._editorDiv);
+                // console.log(div);
+                // let txt = document.createTextNode(content);
+                // let range = StaticTools.getRange();
+                // range.insertNode(txt);
             } 
         }.bind(this);
         (<HTMLElement>this._editorDiv).onkeydown = function(event:KeyboardEvent){
@@ -54,6 +60,34 @@ export class Editor implements IEditor {
             }
         }.bind(this));
         this._ff = editorDiv.cloneNode();
+    }
+
+    private parseFormat(dom:Node|Document, parentNode:Node)
+    {
+        let childNodes = dom.childNodes;
+        for(let i=0; i<=childNodes.length-1; i++){
+            let nodeName = childNodes[i].nodeName.toLowerCase();
+            if(nodeName == 'parsererror'){
+                continue;
+            }
+            if(nodeName == "h1"){
+                let el = document.createElement('b');
+                this.parseFormat(childNodes[i], el);
+                parentNode.appendChild(el);
+                continue;
+            }
+            if(nodeName == "p"){
+                this.parseFormat(childNodes[i], parentNode);
+                let br = document.createElement('br');
+                parentNode.appendChild(br);
+                continue;
+            }
+            if(nodeName == '#text'){
+                parentNode.appendChild(childNodes[i].cloneNode());
+                continue;
+            }
+            this.parseFormat(childNodes[i], parentNode);
+        }
     }
 
     private isMyButton(button:IToolButton, path:Node[])
