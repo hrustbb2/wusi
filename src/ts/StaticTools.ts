@@ -1,5 +1,14 @@
+/**
+ * Набор методов для работы с DOM и выделениями
+ */
 export class StaticTools {
 
+    /**
+     * Оборачивает выделение в обертку возвращаемую колбэком 'createWrapper'
+     * @param range Выделение
+     * @param isMyWrapper Колбэк для сравнения аргумента node и обертки
+     * @param createWrapper Колбэк для создания обертки
+     */
     static wrap(range:Range, isMyWrapper:(node:Node)=>boolean, createWrapper:()=>Element)
     {
         if(range.collapsed && range.endOffset == range.startOffset) return;
@@ -25,9 +34,7 @@ export class StaticTools {
             let beforeNodes = StaticTools.cloneNodes(StaticTools.getBeforeNodes2(topNodes[1], range.endContainer));
             let splitStart = StaticTools.splitNode(range.startContainer, range.startOffset);
             let splitEnd = StaticTools.splitNode(range.endContainer, range.endOffset);
-            //(<HTMLElement>topNodes[0]).remove();
             (<HTMLElement>topNodes[0]).parentNode.removeChild(topNodes[0]);
-            //(<HTMLElement>topNodes[1]).remove();
             (<HTMLElement>topNodes[1]).parentNode.removeChild(topNodes[1]);
             wrapper.appendChild(document.createTextNode(splitStart[1]));
             for(let selectedNode of selectedNodes){
@@ -52,6 +59,10 @@ export class StaticTools {
         StaticTools.clearSelection();
     }
 
+    /**
+     * Возвращает путь от ноды, вверх по вложенности, до собственно editable div
+     * @param node Собственно нода
+     */
     static getPath(node:Node):Node[] {
         let result = [];
         while(!StaticTools.isRootNode(node)){
@@ -65,6 +76,11 @@ export class StaticTools {
         return result;
     }
 
+    /**
+     * Уничтожает обертку вокруг node
+     * @param node Нода, которую нужно развернуть
+     * @param isMyWrapper Определяет обертку
+     */
     static unWrap(node:Node, isMyWrapper:(node:Node)=>boolean)
     {
         if(isMyWrapper(node)){
@@ -81,6 +97,9 @@ export class StaticTools {
         }
     }
 
+    /**
+     * Возвращает выделение
+     */
     static getRange():Range
     {
         if (window.getSelection) {
@@ -98,7 +117,7 @@ export class StaticTools {
         }
     }
 
-    static getSelection():Selection
+    private static getSelection():Selection
     {
         if (window.getSelection) {
             return window.getSelection();
@@ -109,6 +128,9 @@ export class StaticTools {
         }
     }
 
+    /**
+     * Деселект
+     */
     static clearSelection()
     {
         if (window.getSelection) {
@@ -116,6 +138,11 @@ export class StaticTools {
         }
     }
 
+    /**
+     * Самая верхняя нода - моя обертка
+     * @param node 
+     * @param isMyWrapper 
+     */
     static topMyWrapper(node:Node, isMyWrapper:(node:Node)=>boolean):Node
     {
         if(isMyWrapper(node)){
@@ -127,6 +154,11 @@ export class StaticTools {
         return StaticTools.topMyWrapper(node.parentNode, isMyWrapper);
     }
 
+    /**
+     * Дефрагментирует
+     * @param wrapper 
+     * @param isMyWrapper 
+     */
     static pretier(wrapper:Node, isMyWrapper:(node:Node)=>boolean)
     {
         StaticTools.defragmentateTextNodes(wrapper);
@@ -137,6 +169,10 @@ export class StaticTools {
         }
     }
 
+    /**
+     * Клонирует
+     * @param nodes Клонируемые ноды
+     */
     static cloneNodes(nodes:Node[]|NodeList):Node[]
     {
         let result = [];
@@ -152,12 +188,21 @@ export class StaticTools {
         return result;
     }
 
+    /**
+     * Редактор ли это
+     * @param node 
+     */
     static isRootNode(node:Node)
     {
         let r = ((<HTMLElement>node).hasAttribute) ? (<HTMLElement>node).hasAttribute('editor') : false;
         return r;
     }
 
+    /**
+     * Поиск топ ноды с именем nodeName
+     * @param childNode 
+     * @param nodeName 
+     */
     static findTopNode(childNode:Node, nodeName:string):Node
     {
         let result = null;
@@ -172,6 +217,11 @@ export class StaticTools {
         return result;
     }
 
+    /**
+     * Возвращает общую верхнюю ноду
+     * @param startNode 
+     * @param endNode 
+     */
     static getCommonTopNodes(startNode:Node, endNode:Node):Node[]
     {
         let startTop = startNode;
@@ -228,6 +278,11 @@ export class StaticTools {
         return result;
     }
 
+    /**
+     * Режет ноду по 
+     * @param node offset
+     * @param offset 
+     */
     static splitNode(node:Node, offset:number):any[]
     {
         let result:any[] = [];
@@ -241,6 +296,11 @@ export class StaticTools {
         return result;
     }
 
+    /**
+     * Содержит ли container ноду child
+     * @param container 
+     * @param child 
+     */
     static isContainNode(container:Node, child:Node)
     {
         if(container == child) return true;
@@ -255,6 +315,11 @@ export class StaticTools {
         return result;
     }
 
+    /**
+     * Содержит ли container ноду с именем nodeName
+     * @param container 
+     * @param nodeName 
+     */
     static isContainNodeName(container:Node, nodeName:string)
     {
         if(container.nodeName.toLowerCase() == nodeName) return true;
@@ -269,6 +334,11 @@ export class StaticTools {
         return result;
     }
 
+    /**
+     * Есть ли нода в списке
+     * @param node 
+     * @param nodes 
+     */
     static isNodeIn(node:Node, nodes:Node[]):boolean
     {
         for(let i in nodes){
@@ -279,6 +349,12 @@ export class StaticTools {
         return false;
     }
 
+    /**
+     * Список выделенных нод
+     * @param parent 
+     * @param startNode 
+     * @param endNode 
+     */
     static getSelectedNodes(parent:Node, startNode:Node, endNode:Node):Node[]
     {
         let childNodes = parent.childNodes;
