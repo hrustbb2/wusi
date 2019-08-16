@@ -139,7 +139,7 @@ export class Editor implements IEditor {
                 let wrapperInfo = this._wrappersCollection[nodeName+'_'+className];
                 if(wrapperInfo){
                     if(nodeName == 'br'){
-                        result += '[/'+wrapperInfo.bbCode+']';
+                        result += '['+wrapperInfo.bbCode+']';
                     }else{
                         result += '['+wrapperInfo.bbCode+']' + this.contentToString(childNode) + '[/'+wrapperInfo.bbCode+']';
                     }
@@ -190,9 +190,13 @@ export class Editor implements IEditor {
                 let elName = openTag.elName;
                 let className = openTag.className;
                 let newNode = document.createElement(elName);
-                newNode.classList.add(className);
+                if(className){
+                    newNode.classList.add(className);
+                }
                 curentNode.appendChild(newNode);
-                curentNode = newNode;
+                if(elName !== 'br'){
+                    curentNode = newNode;
+                }
                 curentPos += openTag.bbCode.length + 2;
                 continue;
             }
