@@ -2,7 +2,7 @@ import { IToolButton } from './interfaces/IToolButton';
 import { IEditor } from './interfaces/IEditor';
 import { IKeyListener } from './interfaces/IKeyListener';
 import { TWrapper } from './interfaces/TWrapper';
-import { StaticTools } from './StaticTools';
+import { TReplaceElDictionary, StaticTools } from './StaticTools';
 
 type TWrapperCollection = {
     [elementName:string] : TWrapper;
@@ -22,9 +22,29 @@ export class Editor implements IEditor {
 
     public constructor(editorDiv:Element)
     {
+
+        let dictionary:TReplaceElDictionary = {
+            'b': {
+                elName: 'b'
+            },
+            'i': {
+                elName: 'i'
+            },
+            'u': {
+                elName: 'u'
+            },
+            'p': {},
+            'h1': {},
+            'h2': {},
+            'h3': {},
+            'h4': {},
+            'h5': {},
+        };
+
         this._buttons = new Array();
         this._keyListeners = {};
         this._editorDiv = editorDiv;
+
         (<HTMLElement>this._editorDiv).onpaste = function(event:Event){
             event.preventDefault();
             if ((<any>window).clipboardData) {
@@ -33,61 +53,31 @@ export class Editor implements IEditor {
                 let range = StaticTools.getRange();
                 range.insertNode(txt);
             } else {
-                let content = ((<any>event).originalEvent || event).clipboardData.getData('text/plain');
                 let contentHtml = ((<any>event).originalEvent || event).clipboardData.getData('text/html');
-                console.log(contentHtml);
                 let dom = new DOMParser().parseFromString(contentHtml, "text/html");
                 let div = document.createElement('div');
-                this.parseFormat(dom.body, this._editorDiv);
-                // console.log(div);
-                // let txt = document.createTextNode(content);
-                // let range = StaticTools.getRange();
-                // range.insertNode(txt);
+                StaticTools.formatClipboardData(dom.body, div, dictionary);
+                let range = StaticTools.getRange();
+                for(let i = div.childNodes.length-1; i>=0; i--){
+                    range.insertNode(div.childNodes[i]);
+                }
             } 
         }.bind(this);
+
         (<HTMLElement>this._editorDiv).onkeydown = function(event:KeyboardEvent){
             this.keyDown(event);
         }.bind(this);
+
         editorDiv.addEventListener('mouseup', function(e:Event) {
             let range = StaticTools.getRange();
             let path = StaticTools.getPath(range.startContainer);
-            //if(!StaticTools.isNodeIn(this._editorDiv, path)){
-            //    return;
-            //}
             for(let i in this._buttons){
                 this._buttons[i].unsetActive();
                 this.isMyButton(this._buttons[i], path);
             }
         }.bind(this));
-        this._ff = editorDiv.cloneNode();
-    }
 
-    private parseFormat(dom:Node|Document, parentNode:Node)
-    {
-        let childNodes = dom.childNodes;
-        for(let i=0; i<=childNodes.length-1; i++){
-            let nodeName = childNodes[i].nodeName.toLowerCase();
-            if(nodeName == 'parsererror'){
-                continue;
-            }
-            if(nodeName == "h1"){
-                let el = document.createElement('b');
-                this.parseFormat(childNodes[i], el);
-                parentNode.appendChild(el);
-                continue;
-            }
-            if(nodeName == "p"){
-                this.parseFormat(childNodes[i], parentNode);
-                let br = document.createElement('br');
-                parentNode.appendChild(br);
-                continue;
-            }
-            if(nodeName == '#text'){
-                parentNode.appendChild(childNodes[i].cloneNode());
-                continue;
-            }
-            this.parseFormat(childNodes[i], parentNode);
-        }
+        this._ff = editorDiv.cloneNode();
     }
 
     private isMyButton(button:IToolButton, path:Node[])

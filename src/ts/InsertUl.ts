@@ -71,8 +71,13 @@ export class InsertUl implements IToolButton {
             let li = ul.firstChild;
 
             for(let i in selectedNodes){
+                if(StaticTools.isRootNode(selectedNodes[i])){
+                    continue;
+                }
                 if(selectedNodes[i].nodeName.toLowerCase() == 'br' ||
-                    (selectedNodes[i].nodeName.toLowerCase() == '#text' && (<any>selectedNodes[i]).data == '')){
+                    (selectedNodes[i].nodeName.toLowerCase() == '#text' && (<any>selectedNodes[i]).data == '') ||
+                    (<any>selectedNodes[i]).data == '\n'
+                ){
                     selectedNodes[i].parentElement.removeChild(selectedNodes[i]);
                     continue;
                 }

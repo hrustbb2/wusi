@@ -1,3 +1,12 @@
+export type TReplace = {
+    elName?: string,
+    class?: string,
+}
+
+export type TReplaceElDictionary = {
+    [elementName:string] : TReplace;
+}
+
 export class StaticTools {
 
     static wrap(range:Range, isMyWrapper:(node:Node)=>boolean, createWrapper:()=>Element)
@@ -361,6 +370,51 @@ export class StaticTools {
                 previousNode = childNodes[i];
                 i++;
             }
+        }
+    }
+
+    static formatClipboardData(dom:Node|Document, parentNode:Node, dictionary:TReplaceElDictionary)
+    {
+        let childNodes = dom.childNodes;
+        for(let i=0; i<=childNodes.length-1; i++){
+            let nodeName = childNodes[i].nodeName.toLowerCase();
+            if(nodeName == 'parsererror'){
+                continue;
+            }
+            if(dictionary[nodeName]){
+                let r:TReplace = dictionary[nodeName];
+                if(r.elName){
+                    let el = document.createElement(r.elName);
+                    if(r.class){
+                        el.classList.add(r.class);
+                    }
+                    StaticTools.formatClipboardData(childNodes[i], el, dictionary);
+                    parentNode.appendChild(el);
+                }else{
+                    StaticTools.formatClipboardData(childNodes[i], parentNode, dictionary);
+                    let br = document.createElement('br');
+                    parentNode.appendChild(br);
+                }
+                continue;
+            }
+            if(nodeName == "li"){
+                StaticTools.formatClipboardData(childNodes[i], parentNode, dictionary);
+                let br = document.createElement('br');
+                parentNode.appendChild(br);
+                continue;
+            }
+            if(nodeName == "br"){
+                let br = document.createElement('br');
+                parentNode.appendChild(br);
+                continue;
+            }
+            if(nodeName == '#text' && (<Text>childNodes[i]).data.trim() != ''){
+                let trimmedText = (<Text>childNodes[i]).data.trim();
+                let textNode = document.createTextNode(trimmedText);
+                parentNode.appendChild(textNode);
+                continue;
+            }
+            StaticTools.formatClipboardData(childNodes[i], parentNode, dictionary);
         }
     }
 

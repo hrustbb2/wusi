@@ -98,8 +98,8 @@ $(document).ready(function(){
     let toStringButton = document.querySelector('.tostring');
     toStringButton.addEventListener('click', function(e:Event){
         e.preventDefault();
-        editor.stringToContent('12[/br][/br]56');
-        //console.log(editor.contentToString(div));
+        //editor.stringToContent('12[/br][/br]56');
+        console.log(editor.contentToString(div));
         //div.innerHTML = '';
     })
 })
